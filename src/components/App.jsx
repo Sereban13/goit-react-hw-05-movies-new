@@ -1,16 +1,24 @@
+import { lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { routes } from 'routes';
+//
+const Home = lazy(() => import('pages/Home'));
+const MovieDetails = lazy(() => import('pages/MovieDetails'));
+const MovieSearch = lazy(() => import('pages/MovieSearch'));
+const Header = lazy(() => import('./Header'));
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <Routes>
+        <Route path={routes.HOME} element={<Header />}>
+          <Route index element={<Home />} />
+
+          <Route path={routes.MOVIE_ID} element={<MovieDetails />} />
+
+          <Route path={routes.MOVIES} element={<MovieSearch />} />
+        </Route>
+      </Routes>
     </div>
   );
 };
